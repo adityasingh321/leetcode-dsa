@@ -1,0 +1,23 @@
+class Solution {
+    public int trap(int[] height) {
+        int left = 0, right = height.length - 1, unitsOfWater = 0;
+        int length = height.length;
+        int[] leftArr = new int[length];
+        int[] rightArr = new int[length];
+        leftArr[left] = height[left];
+        rightArr[right] = height[right];
+        
+        for(int i = 1; i < length; i++){
+            leftArr[i] = Math.max(leftArr[i-1], height[i]);
+        }
+        
+        for(int i = right-1; i >= 0; i--){
+            rightArr[i] = Math.max(rightArr[i+1], height[i]);
+        }
+        
+        for(int i = 0; i < length; i++){
+            unitsOfWater = unitsOfWater + (Math.min(leftArr[i], rightArr[i]) - height[i]);
+        }
+        return unitsOfWater;
+    }
+}
